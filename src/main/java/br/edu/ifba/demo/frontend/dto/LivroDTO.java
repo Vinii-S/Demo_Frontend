@@ -10,13 +10,13 @@ public class LivroDTO {
     private String titulo;
     private String autor;
     private String editora;
-    private Year anoPublicacao;
+    private Year ano_Publicacao;
     private String genero;
     private String isbn;
-    private Integer numPaginas;
+    private Integer num_Paginas;
     private String sinopse;
     private String idioma;
-    private Date dataCadastro;
+    private Date data_Cadastro;
     private Double preco;
     
     public Long getId_Livro() {
@@ -51,12 +51,12 @@ public class LivroDTO {
         this.editora = editora;
     }
 
-    public Year getAnoPublicacao() {
-        return anoPublicacao;
+    public Year getAno_Publicacao() {
+        return ano_Publicacao;
     }
 
-    public void setAnoPublicacao(Year anoPublicacao) {
-        this.anoPublicacao = anoPublicacao;
+    public void setAno_Publicacao(Year ano_Publicacao) {
+        this.ano_Publicacao = ano_Publicacao;
     }
 
     public String getGenero() {
@@ -75,12 +75,12 @@ public class LivroDTO {
         this.isbn = isbn;
     }
 
-    public Integer getNumPaginas() {
-        return numPaginas;
+    public Integer getNum_Paginas() {
+        return num_Paginas;
     }
 
-    public void setNumPaginas(Integer numPaginas) {
-        this.numPaginas = numPaginas;
+    public void setNum_Paginas(Integer num_Paginas) {
+        this.num_Paginas = num_Paginas;
     }
 
     public String getSinopse() {
@@ -99,12 +99,12 @@ public class LivroDTO {
         this.idioma = idioma;
     }
 
-    public Date getDataCadastro() {
-        return dataCadastro;
+    public Date getData_Cadastro() {
+        return data_Cadastro;
     }
 
-    public void setDataCadastro(Date dataCadastro) {
-        this.dataCadastro = dataCadastro;
+    public void setData_Cadastro(Date data_Cadastro) {
+        this.data_Cadastro = data_Cadastro;
     }
 
     public Double getPreco() {
@@ -118,8 +118,8 @@ public class LivroDTO {
     @Override
     public String toString() {
         return "LivroDTO [idLivro=" + id_Livro + ", titulo=" + titulo + ", autor=" + autor + ", editora=" + editora
-                + ", anoPublicacao=" + anoPublicacao + ", genero=" + genero + ", isbn=" + isbn + ", numPaginas="
-                + numPaginas + ", sinopse=" + sinopse + ", idioma=" + idioma + ", dataCadastro=" + dataCadastro
+                + ", ano_Publicacao=" + ano_Publicacao + ", genero=" + genero + ", isbn=" + isbn + ", num_Paginas="
+                + num_Paginas + ", sinopse=" + sinopse + ", idioma=" + idioma + ", data_Cadastro=" + data_Cadastro
                 + ", preco=" + preco + "]";
     }
 

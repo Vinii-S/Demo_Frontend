@@ -13,7 +13,15 @@
           <th>ID</th>
           <th>Título</th>
           <th>Autor</th>
-          <th>Ações</th>
+          <th>Editora</th>
+          <th>Ano de Publicação</th>
+          <th>Gênero</th>
+          <th>ISBN</th>
+          <th>Número de Páginas</th>
+          <th>Sinópse</th>
+          <th>Idioma</th>
+          <th>Data de Cadastro</th>
+          <th>Preço</th>
         </tr>
       </thead>
       <tbody id="tabelaCorpo"></tbody>
@@ -27,91 +35,17 @@
           <input type="text" id="titulo" placeholder="Título" required />
           <input type="text" id="autor" placeholder="Autor" required />
           <input type="text" id="isbn" placeholder="ISBN" />
-          <input
-            type="number"
-            id="anoPublicacao"
-            placeholder="Ano de Publicação"
-          />
+          <input type="number" id="ano_Publicacao" placeholder="Ano de Publicação"/>
           <input type="text" id="editora" placeholder="Editora" />
           <input type="text" id="genero" placeholder="Gênero" required />
           <input type="text" id="idioma" placeholder="Idioma" required />
           <input type="number" id="preco" placeholder="Preço" required />
-          <input
-  type="number"
-  id="numPaginas"
-  placeholder="Número de Páginas"
-  required
-/>
+          <input type="number" id="num_Paginas" placeholder="Número de Páginas" required/>
           <textarea id="sinopse" placeholder="Sinopse" required></textarea>
           <button type="submit">Cadastrar</button>
         </form>
       </div>
-
-      <!-- Formulário de Atualização -->
-      <div style="flex: 1">
-        <h1>Atualizar Livro</h1>
-        <form
-          id="formAtualizarLivro"
-          onsubmit="event.preventDefault(); atualizarLivro();"
-        >
-          <input
-            type="number"
-            id="idLivroAtualizar"
-            placeholder="ID do Livro"
-            required
-          />
-          <input
-            type="text"
-            id="tituloAtualizar"
-            placeholder="Título"
-            required
-          />
-          <input type="text" id="autorAtualizar" placeholder="Autor" required />
-          <input
-            type="text"
-            id="generoAtualizar"
-            placeholder="Gênero"
-            required
-          />
-          <input
-            type="text"
-            id="idiomaAtualizar"
-            placeholder="Idioma"
-            required
-          />
-          <input
-            type="number"
-            id="precoAtualizar"
-            placeholder="Preço"
-            required
-          />
-          <input
-  type="number"
-  id="numPaginasAtualizar"
-  placeholder="Número de Páginas"
-  required
-/>
-          <input
-            type="text"
-            id="editoraAtualizar"
-            placeholder="Editora"
-            required
-          />
-          <input
-            type="number"
-            id="anoPublicacaoAtualizar"
-            placeholder="Ano de Publicação"
-            required
-          />
-          <input type="text" id="isbnAtualizar" placeholder="ISBN" required />
-          <textarea
-            id="sinopseAtualizar"
-            placeholder="Sinopse"
-            required
-          ></textarea>
-          <button type="submit">Atualizar Livro</button>
-        </form>
-      </div>
+      
     </div>
 
     <p id="resultado"></p>
@@ -154,7 +88,7 @@
     sinopse: document.getElementById("sinopse").value,
     idioma: document.getElementById("idioma").value,
     preco: document.getElementById("preco").value,
-    numPaginas: document.getElementById("numPaginas").value, // Corrigido
+    num_Paginas: document.getElementById("num_Paginas").value, 
   };
 
   const response = await fetch(API_URL, {
@@ -181,29 +115,21 @@
         tabelaCorpo.innerHTML = ""; // Limpa a tabela antes de adicionar novos livros
 
         livros.forEach((livro) => {
+          console.log(livro)
           const row = document.createElement("tr");
           row.innerHTML = `
                     <td>${livro.id_livro}</td>
                     <td>${livro.titulo}</td>
                     <td>${livro.autor}</td>
-                    
-                   <td>
-                        <button 
-                            onclick="consultarPorId2(${livro.id_livro})" 
-                            style="background-color: gray; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 14px; font-weight: bold; !important;">
-                            Ver Detalhes
-                        </button>
-                        <button 
-                            onclick="preencherFormularioAtualizacao(${livro.id_livro})" 
-                            style="background-color: orange; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 14px; font-weight: bold; !important;">
-                            Atualizar
-                        </button>
-                        <button 
-                            onclick="deletarLivro(${livro.id_livro})" 
-                            style="background-color: red; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 14px; font-weight: bold; !important;">
-                            Deletar
-                        </button>
-                    </td>
+                    <td>${livro.editora}</td>
+                    <td>${livro.ano_publicacao}</td>
+                    <td>${livro.genero}</td>
+                    <td>${livro.isbn}</td>
+                    <td>${livro.num_paginas}</td>
+                    <td>${livro.sinopse}</td>
+                    <td>${livro.idioma}</td>
+                    <td>${livro.data_cadastro}</td>
+                    <td>${livro.preco}</td>
                 `;
           tabelaCorpo.appendChild(row);
         });
@@ -238,7 +164,7 @@ async function preencherFormularioAtualizacao(id) {
     genero: document.getElementById("generoAtualizar").value,
     idioma: document.getElementById("idiomaAtualizar").value,
     preco: document.getElementById("precoAtualizar").value,
-    numPaginas: document.getElementById("numPaginasAtualizar").value, // Corrigido
+    num_Paginas: document.getElementById("num_PaginasAtualizar").value, // Corrigido
     editora: document.getElementById("editoraAtualizar").value,
     anoPublicacao: document.getElementById("anoPublicacaoAtualizar").value,
     isbn: document.getElementById("isbnAtualizar").value,
@@ -341,7 +267,7 @@ async function preencherFormularioAtualizacao(id) {
         <p><strong>Gênero:</strong> ${livro.genero}</p>
         <p><strong>Idioma:</strong> ${livro.idioma}</p>
         <p><strong>Preço:</strong> ${livro.preco}</p>
-        <p><strong>Número de Páginas:</strong> ${livro.numPaginas}</p>
+        <p><strong>Número de Páginas:</strong> ${livro.num_Paginas}</p>
         <p><strong>Editora:</strong> ${livro.editora}</p>
         <p><strong>Ano de Publicação:</strong> ${livro.anoPublicacao}</p>
         <p><strong>Sinopse:</strong> ${livro.sinopse}</p>
@@ -441,7 +367,7 @@ async function preencherFormularioAtualizacao(id) {
       }
 
       #tabelaLivros th {
-        background-color: #4caf50;
+        background-color: #4c56af;
         color: white;
         font-weight: bold;
         text-transform: uppercase;
@@ -509,7 +435,7 @@ async function preencherFormularioAtualizacao(id) {
       input:focus,
       button:focus {
         outline: none;
-        border-color: #4caf50;
+        border-color: #2d3dc7;
       }
 
       /* Detalhes do Livro */
@@ -531,7 +457,7 @@ async function preencherFormularioAtualizacao(id) {
       h2 {
         font-family: "Arial", sans-serif;
         font-weight: bold;
-        color: #4caf50;
+        color: #2d3dc7;
       }
     </style>
   </body>
