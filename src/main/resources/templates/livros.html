@@ -6,51 +6,64 @@
     <title>Cadastro de Livros</title>
   </head>
   <body>
-    <h2>Livros Cadastrados</h2>
-    <table id="tabelaLivros">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Título</th>
-          <th>Autor</th>
-          <th>Editora</th>
-          <th>Ano de Publicação</th>
-          <th>Gênero</th>
-          <th>ISBN</th>
-          <th>Número de Páginas</th>
-          <th>Sinópse</th>
-          <th>Idioma</th>
-          <th>Data de Cadastro</th>
-          <th>Preço</th>
-        </tr>
-      </thead>
-      <tbody id="tabelaCorpo"></tbody>
-    </table>
+    
 
     <div style="display: flex; justify-content: space-between; gap: 20px">
       <!-- Formulário de Cadastro -->
       <div style="flex: 1">
         <h1>Cadastro de Livros</h1>
-        <form id="formLivro" onsubmit="event.preventDefault(); addLivro();">
-          <input type="text" id="titulo" placeholder="Título" required />
-          <input type="text" id="autor" placeholder="Autor" required />
-          <input type="text" id="isbn" placeholder="ISBN" />
-          <input type="number" id="ano_Publicacao" placeholder="Ano de Publicação"/>
-          <input type="text" id="editora" placeholder="Editora" />
-          <input type="text" id="genero" placeholder="Gênero" required />
-          <input type="text" id="idioma" placeholder="Idioma" required />
-          <input type="number" id="preco" placeholder="Preço" required />
-          <input type="number" id="num_Paginas" placeholder="Número de Páginas" required/>
-          <textarea id="sinopse" placeholder="Sinopse" required></textarea>
-          <button type="submit">Cadastrar</button>
-        </form>
+<form id="formLivro" onsubmit="event.preventDefault(); addLivro();" style="display: flex; flex-direction: column; gap: 10px;">
+  <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    <div style="flex: 1; min-width: 150px;">
+      <label for="titulo">Título*</label>
+      <input type="text" id="titulo" placeholder="Título" required />
+    </div>
+    <div style="flex: 1; min-width: 150px;">
+      <label for="autor">Autor*</label>
+      <input type="text" id="autor" placeholder="Autor" required />
+    </div>
+    <div style="flex: 1; min-width: 150px;">
+      <label for="isbn">ISBN</label>
+      <input type="text" id="isbn" placeholder="ISBN" />
+    </div>
+    <div style="flex: 1; min-width: 150px;">
+      <label for="ano_Publicacao">Ano de Publicação</label>
+      <input type="number" id="ano_publicacao" placeholder="Ano de Publicação" />
+    </div>
+    <div style="flex: 1; min-width: 150px;">
+      <label for="editora">Editora</label>
+      <input type="text" id="editora" placeholder="Editora" />
+    </div>
+    <div style="flex: 1; min-width: 150px;">
+      <label for="genero">Gênero</label>
+      <input type="text" id="genero" placeholder="Gênero" required />
+    </div>
+    <div style="flex: 1; min-width: 150px;">
+      <label for="idioma">Idioma</label>
+      <input type="text" id="idioma" placeholder="Idioma" required />
+    </div>
+    <div style="flex: 1; min-width: 150px;">
+      <label for="preco">Preço</label>
+      <input type="number" id="preco" placeholder="Preço" required />
+    </div>
+    <div style="flex: 1; min-width: 150px;">
+      <label for="num_Paginas">Número de Páginas</label>
+      <input type="number" id="num_paginas" placeholder="Número de Páginas" required />
+    </div>
+    <div style="flex: 1; min-width: 150px;">
+      <label for="sinopse">Sinopse</label>
+      <input type="text" id="sinopse" placeholder="Sinopse" required />
+    </div>
+  </div>
+  <button type="submit">Cadastrar</button>
+</form>
       </div>
       
     </div>
 
     <p id="resultado"></p>
 
-    <h2>Consultar Livros</h2>
+    <h2>Consultas</h2>
     <div class="consultar-container">
       <div class="consultar-card">
         <h2>Consultar por ID</h2>
@@ -69,6 +82,26 @@
       </div>
     </div>
 
+    <h2>Livros Cadastrados</h2>
+    <table id="tabelaLivros">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Título</th>
+          <th>Autor</th>
+          <th>Editora</th>
+          <th>Ano de Publicação</th>
+          <th>Gênero</th>
+          <th>ISBN</th>
+          <th>Número de Páginas</th>
+          <th>Sinópse</th>
+          <th>Idioma</th>
+          <th>Preço</th>
+          <th id="acao">Ação</th>
+        </tr>
+      </thead>
+      <tbody id="tabelaCorpo"></tbody>
+    </table>
     <h2>Detalhes do Livro</h2>
     <div id="detalhesLivro">
       <!-- Detalhes do livro aparecerão aqui -->
@@ -79,16 +112,17 @@
 
       // Função para cadastrar um livro
       async function addLivro() {
-  const livro = {
+    const livro = {
     titulo: document.getElementById("titulo").value,
     autor: document.getElementById("autor").value,
-    isbn: document.getElementById("isbn").value,
-    anoPublicacao: document.getElementById("anoPublicacao").value,
     editora: document.getElementById("editora").value,
+    ano_publicacao: document.getElementById("ano_publicacao").value,
+    genero: document.getElementById("genero").value,
+    isbn: document.getElementById("isbn").value,
+    num_paginas: document.getElementById("num_paginas").value, 
     sinopse: document.getElementById("sinopse").value,
     idioma: document.getElementById("idioma").value,
     preco: document.getElementById("preco").value,
-    num_Paginas: document.getElementById("num_Paginas").value, 
   };
 
   const response = await fetch(API_URL, {
@@ -128,69 +162,15 @@
                     <td>${livro.num_paginas}</td>
                     <td>${livro.sinopse}</td>
                     <td>${livro.idioma}</td>
-                    <td>${livro.data_cadastro}</td>
                     <td>${livro.preco}</td>
+                    <td><button onclick="deletarLivro(${livro.id_livro})">Deletar</button></td>
                 `;
           tabelaCorpo.appendChild(row);
         });
       }
-
-      // Função para preencher o formulário de atualização
-      // Função para preencher o formulário de atualização
-async function preencherFormularioAtualizacao(id) {
-  const response = await fetch(`${API_URL}/${id}`);
-  
-  const livro = await response.json();
-  console.log(livro)
-  document.getElementById("idLivroAtualizar").value = id;
-  document.getElementById("tituloAtualizar").value = livro.titulo;
-  document.getElementById("autorAtualizar").value = livro.autor;
-  document.getElementById("generoAtualizar").value = livro.genero;
-  document.getElementById("idiomaAtualizar").value = livro.idioma;
-  document.getElementById("precoAtualizar").value = livro.preco;
-  document.getElementById("num_PaginasAtualizar").value = livro.num_Paginas;
-  document.getElementById("editoraAtualizar").value = livro.editora;
-  document.getElementById("anoPublicacaoAtualizar").value = livro.anoPublicacao;
-  document.getElementById("isbnAtualizar").value = livro.isbn;
-  document.getElementById("sinopseAtualizar").value = livro.sinopse;
-}
-
-     // Função para atualizar um livro
-     async function atualizarLivro() {
-  const livroAtualizado = {
-    id_livro: document.getElementById("idLivroAtualizar").value,
-    titulo: document.getElementById("tituloAtualizar").value,
-    autor: document.getElementById("autorAtualizar").value,
-    genero: document.getElementById("generoAtualizar").value,
-    idioma: document.getElementById("idiomaAtualizar").value,
-    preco: document.getElementById("precoAtualizar").value,
-    num_Paginas: document.getElementById("num_PaginasAtualizar").value, // Corrigido
-    editora: document.getElementById("editoraAtualizar").value,
-    anoPublicacao: document.getElementById("anoPublicacaoAtualizar").value,
-    isbn: document.getElementById("isbnAtualizar").value,
-    sinopse: document.getElementById("sinopseAtualizar").value,
-  };
-
-  const idLivro = document.getElementById("idLivroAtualizar").value;
-
-  const response = await fetch(`${API_URL}/${idLivro}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(livroAtualizado),
-  });
-
-  if (response.ok) {
-    alert("Livro atualizado com sucesso!");
-    listarLivros();
-  } else {
-    alert("Erro ao atualizar o livro.");
-  }
-}
       // Função para deletar um livro
       async function deletarLivro(id) {
-        const response = await fetch(`${API_URL}/${id}`, {
+        const response = await fetch(`${API_URL}/delete/${id}`, {
           method: "DELETE",
         });
 
@@ -205,7 +185,7 @@ async function preencherFormularioAtualizacao(id) {
       // Função para consultar um livro por ID
       async function consultarPorId() {
         const id = document.getElementById("idConsulta").value;
-        const response = await fetch(`${API_URL}/${id}`);
+        const response = await fetch(`${API_URL}/findById/${id}`);
         const livro = await response.json();
 
         if (livro) {
@@ -216,7 +196,7 @@ async function preencherFormularioAtualizacao(id) {
       }
 
       async function consultarPorId2(ID) {
-        const response = await fetch(`${API_URL}/${ID}`);
+        const response = await fetch(`${API_URL}/findById/${ID}`);
         const livro = await response.json();
 
         if (livro) {
@@ -267,10 +247,11 @@ async function preencherFormularioAtualizacao(id) {
         <p><strong>Gênero:</strong> ${livro.genero}</p>
         <p><strong>Idioma:</strong> ${livro.idioma}</p>
         <p><strong>Preço:</strong> ${livro.preco}</p>
-        <p><strong>Número de Páginas:</strong> ${livro.num_Paginas}</p>
+        <p><strong>Número de Páginas:</strong> ${livro.num_paginas}</p>
         <p><strong>Editora:</strong> ${livro.editora}</p>
-        <p><strong>Ano de Publicação:</strong> ${livro.anoPublicacao}</p>
+        <p><strong>Ano de Publicação:</strong> ${livro.ano_publicacao}</p>
         <p><strong>Sinopse:</strong> ${livro.sinopse}</p>
+         
     `;
 }
 
@@ -321,9 +302,7 @@ async function preencherFormularioAtualizacao(id) {
         transition: transform 0.3s;
       }
 
-      .consultar-card:hover {
-        transform: translateY(-5px);
-      }
+      
 
       .consultar-card input {
         width: 80%;
@@ -335,7 +314,7 @@ async function preencherFormularioAtualizacao(id) {
       }
 
       .consultar-card button {
-        background-color: #4caf50;
+        background-color: #4476e4;
         color: white;
         border: none;
         padding: 10px;
@@ -345,9 +324,7 @@ async function preencherFormularioAtualizacao(id) {
         transition: background-color 0.3s;
       }
 
-      .consultar-card button:hover {
-        background-color: #45a049;
-      }
+     
 
       /* Seção Livros Cadastrados */
       #tabelaLivros {
@@ -392,9 +369,7 @@ async function preencherFormularioAtualizacao(id) {
         transition: background-color 0.3s;
       }
 
-      #tabelaLivros td button:hover {
-        background-color: #c0392b;
-      }
+      
 
       /* Formulários */
       form {
@@ -420,7 +395,7 @@ async function preencherFormularioAtualizacao(id) {
       }
 
       button {
-        background-color: #4caf50;
+        background-color: #4476e4;
         color: white;
         border: none;
         cursor: pointer;
